@@ -1,9 +1,8 @@
 export class HttpResponse {
     code: number;
-    errorMessage: any;
+    message: any;
     constructor(message : any, errorCode : number){
-        this.errorMessage = message
+        this.message = message
         this.code = errorCode
     }
 }
-// module.exports = HttpResponse
