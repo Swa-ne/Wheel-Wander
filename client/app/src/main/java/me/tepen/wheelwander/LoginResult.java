@@ -1,6 +1,11 @@
 package me.tepen.wheelwander;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResult {
-    private String email;
-    private String password;
+
+    @SerializedName("message")
+    public String message;
+    @SerializedName("accessToken")
+    public String accessToken;
 }

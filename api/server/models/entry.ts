@@ -1,4 +1,3 @@
-import { error } from "console"
 import mysql from "mysql2"
 import { HttpResponse } from "./http-response"
 
@@ -22,7 +21,7 @@ export const loginUsertoDatabase = async (userIdentifier: String, password : Str
             }
             return new HttpResponse({"message" : "Wrong Password."}, 200);
         }
-        return new HttpResponse({"message" : "User not Found."}, 400);
+        return new HttpResponse({"message" : "User not Found."}, 200);
     } catch {
         return new HttpResponse({"message" : "Internal Server Error."}, 500);
     }

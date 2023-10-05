@@ -8,9 +8,9 @@ import retrofit2.http.POST;
 
 
 public interface EntryInterface {
-    @POST("/login")
+    @POST("/entry/login")
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
 
-//    @POST("/signup")
-//    Call<Void> executeSignup(@Body HashMap<String, String> map);
+    @POST("/entry/signup")
+    Call<Void> executeSignup(@Body HashMap<String, String> map);
 }
