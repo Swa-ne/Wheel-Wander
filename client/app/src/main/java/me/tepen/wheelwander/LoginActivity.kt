@@ -4,10 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import me.tepen.wheelwander.databinding.LoginActivityBinding
@@ -24,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var entryInterface : EntryInterface
     private lateinit var intent : Intent
 
-    private val BASE_URL : String = "http://192.168.1.92:3000"
+    private val BASE_URL : String = "http://192.168.1.90:3000"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LoginActivityBinding.inflate(layoutInflater)
@@ -81,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
     private fun getEncryptedSharedPreference() : SharedPreferences? {
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
         return EncryptedSharedPreferences.create(
-            "Asgjshffeakjdslffjlaskdjflasdl;kjflasdf",
+            "Asgjshffeakjdslffjlaskdjflasdlkjflasdf",
             masterKeyAlias,
             this,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,

@@ -58,11 +58,11 @@ const checkEveryInputForLogin = async (userIdentifier : String, password : Strin
 export const registerUserController = async (req : Request, res : Response) => {
     const username : String = req.body.username;
     const emailAddress : String = (req.body.emailAddress).toLowerCase();
-    const comfirmationEmailAddress : String = (req.body.comfirmationEmailAddress).toLowerCase();
+    const confirmationEmailAddress : String = (req.body.confirmationEmailAddress).toLowerCase();
     const password : String = req.body.password;
-    const comfirmationPassword : String = req.body.comfirmationPassword;
+    const confirmationPassword : String = req.body.confirmationPassword;
     
-    const checkerForInput = await checkEveryInputForSignup(username, emailAddress, comfirmationEmailAddress, password, comfirmationPassword)
+    const checkerForInput = await checkEveryInputForSignup(username, emailAddress, confirmationEmailAddress, password, confirmationPassword)
     if(checkerForInput.message["message"] === "success"){
         const data = registerUsertoDatabase(username, emailAddress, password)
         if (!data) {
@@ -75,7 +75,7 @@ export const registerUserController = async (req : Request, res : Response) => {
     return;
 }
 
-const checkEveryInputForSignup = async (username : String, emailAddress : String, comfirmationEmailAddress : String, password : String, comfirmationPassword : String) : Promise<HttpResponse> => {
+const checkEveryInputForSignup = async (username : String, emailAddress : String, confirmationEmailAddress : String, password : String, confirmationPassword : String) : Promise<HttpResponse> => {
     if (!checkUsernameValidity(username)) {
         return new HttpResponse({"message":"Username must only contains letters and numbers."}, 200);
     }
@@ -91,10 +91,10 @@ const checkEveryInputForSignup = async (username : String, emailAddress : String
     if (!await checkEmailAvailability(emailAddress)) {
         return new HttpResponse({"message":"This email address is being used."}, 200);
     }
-    if (emailAddress !== comfirmationEmailAddress) {
+    if (emailAddress !== confirmationEmailAddress) {
         return new HttpResponse({"message":"Those email address didn't match. Try again."}, 200);
     }
-    if (password !== comfirmationPassword) {
+    if (password !== confirmationPassword) {
         return new HttpResponse({"message":"Those password didn't match. Try again."}, 200);
     }
     return new HttpResponse({"message":"success"}, 200);

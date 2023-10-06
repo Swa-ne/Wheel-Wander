@@ -12,5 +12,5 @@ public interface EntryInterface {
     Call<LoginResult> executeLogin(@Body HashMap<String, String> map);
 
     @POST("/entry/signup")
-    Call<Void> executeSignup(@Body HashMap<String, String> map);
+    Call<LoginResult> executeSignup(@Body HashMap<String, String> map);
 }
