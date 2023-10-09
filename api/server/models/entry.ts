@@ -48,3 +48,27 @@ export const checkEmailAvailability = async (emailAddress : String) : Promise<bo
     
     return result.length == 0
 }
+
+// export const addRefreshToken = async (refreshToken : String) => {
+//     try{
+//         const [result] : Array<any> = await pool.query(`INSERT INTO refresh_token (token) VALUES (?)`, refreshToken)
+//         return true
+//     } catch {
+//         return false
+//     }
+
+// }
+// export const checkRefreshToken = async (refreshToken : String) => {
+//     const [result] : Array<any> = await pool.query(`SELECT * FROM refresh_token WHERE token = ?;`, refreshToken)
+    
+//     return result.length == 0
+// }
+// export const deleteRefreshToken = async (refreshToken : String) => {
+//     // TODO: Delete token from db
+//     try{
+//         const [result] : Array<any> = await pool.query(`INSERT INTO refresh_token (token) VALUES (?)`, refreshToken)
+//         return true
+//     } catch {
+//         return false
+//     }
+// }

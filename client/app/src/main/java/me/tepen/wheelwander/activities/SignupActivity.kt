@@ -1,64 +1,60 @@
-package me.tepen.wheelwander
+package me.tepen.wheelwander.activities
 
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
-import me.tepen.wheelwander.databinding.LoginActivityBinding
+import me.tepen.wheelwander.network.APIClient
+import me.tepen.wheelwander.utils.EncryptSharedPreference
+import me.tepen.wheelwander.interfaces.EntryInterface
+import me.tepen.wheelwander.models.LoginResult
+import me.tepen.wheelwander.databinding.ActivitySignupBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class LoginActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
 
-    private lateinit var binding: LoginActivityBinding
+    private lateinit var binding: ActivitySignupBinding
     private lateinit var retrofit: Retrofit
     private lateinit var entryInterface : EntryInterface
     private lateinit var intent : Intent
 
-    private val BASE_URL : String = "http://192.168.1.90:3000"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LoginActivityBinding.inflate(layoutInflater)
+        binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
+        retrofit = APIClient().getClient()!!
         entryInterface = retrofit.create(EntryInterface::class.java)
 
-        binding.loginButton.setOnClickListener{
-            handleLogin()
-        }
         binding.signUpButton.setOnClickListener{
-            intent = Intent(this, SignupActivity::class.java)
+            handleSignup()
+        }
+        binding.loginButton.setOnClickListener{
+            intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }
-
-    private fun handleLogin() {
+    private fun handleSignup() {
 
         var map : HashMap<String, String> = HashMap()
-        map["userIdentifier"] = binding.emailEditText.text.toString()
+        map["username"] = binding.usernameEditText.text.toString()
+        map["emailAddress"] = binding.emailEditText.text.toString()
+        map["confirmationEmailAddress"] = binding.confirmEmailEditText.text.toString()
         map["password"] = binding.passwordEditText.text.toString()
+        map["confirmationPassword"] = binding.confirmPasswordEditText.text.toString()
 
-        var call : Call<LoginResult> = entryInterface.executeLogin(map)
+        var call : Call<LoginResult> = entryInterface.executeSignup(map)
         call.enqueue(object : Callback<LoginResult> {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 if(response.isSuccessful) {
                     var responseBodyMessage : String? = response.body()?.message
                     var responseBodyToken : String? = response.body()?.accessToken
-                    
+
                     if(responseBodyMessage == "success") {
-                        getEncryptedSharedPreference()?.edit()?.putString("token", responseBodyToken)
+                        EncryptSharedPreference(applicationContext).getEncryptedSharedPreference()?.edit()?.putString("token", responseBodyToken)?.apply()
                         intent = Intent(applicationContext, MainActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -73,16 +69,5 @@ class LoginActivity : AppCompatActivity() {
                 println("SwaneErr: " + t + call)
             }
         })
-    }
-
-    private fun getEncryptedSharedPreference() : SharedPreferences? {
-        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-        return EncryptedSharedPreferences.create(
-            "Asgjshffeakjdslffjlaskdjflasdlkjflasdf",
-            masterKeyAlias,
-            this,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
     }
 }

@@ -5,6 +5,16 @@ import { HttpResponse } from "../models/http-response"
 
 import jwt from "jsonwebtoken";
 
+// Check Current User 
+export const checkCurrentUser = async (req : Request, res : Response) => {
+    try {
+        res.status(200).json({"message": "valid"})
+    } catch {
+        res.status(500).json({"message": "Internal Server Error"})
+        return;
+    }
+}
+
 // Logins
 export const loginUserController = async (req : Request, res : Response) => {
     try {

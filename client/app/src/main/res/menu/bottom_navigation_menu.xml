@@ -1,0 +1,27 @@
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/home_icon_selector"
+        android:title="@string/tab1"/>
+    <item
+        android:id="@+id/page2Fragment"
+        android:enabled="true"
+        android:icon="@drawable/todo_icon_selector"
+        android:title="@string/tab2"/>
+    <item
+        android:id="@+id/tab5"
+        android:enabled="false"
+        android:title=""/>
+    <item
+        android:id="@+id/messageFragment"
+        android:enabled="true"
+        android:icon="@drawable/messages_icon_selector"
+        android:title="@string/tab3"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:enabled="true"
+        android:icon="@drawable/profile_icon_selector"
+        android:title="@string/tab5"/>
+</menu>

@@ -5,7 +5,7 @@
     android:id="@+id/sign"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -26,9 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:maxLines="1"
         android:hint="Email"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@."
+        android:inputType="textFilter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +44,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:maxLines="1"
         android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
