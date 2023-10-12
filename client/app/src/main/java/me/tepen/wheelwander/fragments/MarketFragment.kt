@@ -45,7 +45,7 @@ class MarketFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Page4Fragment.
+         * @return A new instance of fragment Page3Fragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic

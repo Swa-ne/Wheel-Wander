@@ -6,19 +6,19 @@
         android:icon="@drawable/home_icon_selector"
         android:title="@string/tab1"/>
     <item
-        android:id="@+id/page2Fragment"
+        android:id="@+id/messagesFragment"
         android:enabled="true"
-        android:icon="@drawable/todo_icon_selector"
+        android:icon="@drawable/messages_icon_selector"
         android:title="@string/tab2"/>
     <item
-        android:id="@+id/tab5"
+        android:id="@+id/marketFragment"
         android:enabled="false"
         android:title=""/>
     <item
-        android:id="@+id/messageFragment"
+        android:id="@+id/historyFragment"
         android:enabled="true"
-        android:icon="@drawable/messages_icon_selector"
-        android:title="@string/tab3"/>
+        android:icon="@drawable/todo_icon_selector"
+        android:title="@string/tab4"/>
     <item
         android:id="@+id/profileFragment"
         android:enabled="true"

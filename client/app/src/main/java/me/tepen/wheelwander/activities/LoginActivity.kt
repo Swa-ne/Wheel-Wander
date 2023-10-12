@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import kotlin.properties.Delegates
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,8 +23,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var retrofit: Retrofit
     private lateinit var entryInterface : EntryInterface
     private lateinit var intent : Intent
+    private var pressedTime : Long = 0
 
-    private val BASE_URL : String = "http://192.168.1.90:3000"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LoginActivityBinding.inflate(layoutInflater)
@@ -92,5 +93,15 @@ class LoginActivity : AppCompatActivity() {
                 println("SwaneErr: " + t + call)
             }
         })
+    }
+
+    override fun onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

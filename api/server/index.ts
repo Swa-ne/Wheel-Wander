@@ -5,6 +5,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const entryRoutes = require("./routes/entry")
+const messageRoutes = require("./routes/message")
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(
 );
 
 app.use("/entry/", entryRoutes)
+app.use("/message/", messageRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello from your Node.js Express server!');

@@ -1,15 +1,8 @@
-import mysql from "mysql2"
+import { pool } from "./database-connection"
 import { HttpResponse } from "./http-response"
 
 const bcrypt = require("bcrypt")
 
-// Connecting to the Database
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-}).promise()
 
 export const loginUsertoDatabase = async (userIdentifier: String, password : String, userIdentifierType : String) => {
     try {

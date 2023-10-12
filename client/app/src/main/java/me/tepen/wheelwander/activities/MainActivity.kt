@@ -3,6 +3,7 @@ package me.tepen.wheelwander.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import me.tepen.wheelwander.R
 import me.tepen.wheelwander.network.APIClient
@@ -11,9 +12,9 @@ import me.tepen.wheelwander.interfaces.EntryInterface
 import me.tepen.wheelwander.models.LoginResult
 import me.tepen.wheelwander.databinding.ActivityMainBinding
 import me.tepen.wheelwander.fragments.HomeFragment
-import me.tepen.wheelwander.fragments.Page2Fragment
-import me.tepen.wheelwander.fragments.Page3Fragment
+import me.tepen.wheelwander.fragments.MessagesFragment
 import me.tepen.wheelwander.fragments.MarketFragment
+import me.tepen.wheelwander.fragments.HistoryFragment
 import me.tepen.wheelwander.fragments.ProfileFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,32 +24,34 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var intent : Intent
     private lateinit var binding : ActivityMainBinding
+    private var pressedTime : Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val homeFragment = HomeFragment()
-        val page2Fragment = Page2Fragment()
-        val page3Fragment = Page3Fragment()
-        val profileFragment = ProfileFragment()
+        val messagesFragment = MessagesFragment()
         val marketFragment = MarketFragment()
+        val profileFragment = ProfileFragment()
+        val historyFragment = HistoryFragment()
 
         setCurrentFragment(homeFragment)
         binding.marketButton.setOnClickListener{
             setCurrentFragment(marketFragment)
+            binding.bottomNavigation.menu.setGroupCheckable(0, false, true);
         }
         binding.bottomNavigation.setOnItemSelectedListener  {
+            binding.bottomNavigation.menu.setGroupCheckable(0, true, true);
             when(it.itemId){
                 R.id.homeFragment ->setCurrentFragment(homeFragment)
-                R.id.page2Fragment ->setCurrentFragment(page2Fragment)
-                R.id.messageFragment ->setCurrentFragment(page3Fragment)
+                R.id.messagesFragment ->setCurrentFragment(messagesFragment)
+                R.id.historyFragment ->setCurrentFragment(historyFragment)
                 R.id.profileFragment ->setCurrentFragment(profileFragment)
 
             }
             true
         }
-//        TODO: use of back button
     }
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
@@ -86,5 +89,15 @@ class MainActivity : AppCompatActivity() {
     private fun goToLogin(){
         intent = Intent(applicationContext, LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finish();
+        } else {
+            Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

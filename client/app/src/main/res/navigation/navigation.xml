@@ -1,64 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="me.tepen.wheelwander.fragments.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_page2Fragment"
-            app:destination="@id/page2Fragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_page3Fragment"
-            app:destination="@id/messageFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment2"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/page2Fragment"
-        android:name="me.tepen.wheelwander.fragments.Page2Fragment"
-        android:label="Page2Fragment">
-        <action
-            android:id="@+id/action_page2Fragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_page2Fragment_to_page3Fragment"
-            app:destination="@id/messageFragment" />
-        <action
-            android:id="@+id/action_page2Fragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/messageFragment"
-        android:name="me.tepen.wheelwander.fragments.Page3Fragment"
-        android:label="Page3Fragment">
-        <action
-            android:id="@+id/action_page3Fragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_page3Fragment_to_page2Fragment"
-            app:destination="@id/page2Fragment" />
-        <action
-            android:id="@+id/action_page3Fragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="me.tepen.wheelwander.fragments.ProfileFragment"
-        android:label="ProfileFragment" >
-        <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_page2Fragment"
-            app:destination="@id/page2Fragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_page3Fragment"
-            app:destination="@id/messageFragment" />
-    </fragment>
 
+    <fragment
+        android:id="@+id/historyFragment2"
+        android:name="me.tepen.wheelwander.fragments.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_historyFragment2_to_messagesFragment2"
+            app:destination="@id/messagesFragment2" />
+        <action
+            android:id="@+id/action_historyFragment2_to_marketFragment2"
+            app:destination="@id/marketFragment2" />
+        <action
+            android:id="@+id/action_historyFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="me.tepen.wheelwander.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_messagesFragment2"
+            app:destination="@id/messagesFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_marketFragment2"
+            app:destination="@id/marketFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_historyFragment2"
+            app:destination="@id/historyFragment2" />
+        <action
+            android:id="@+id/action_homeFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/messagesFragment2"
+        android:name="me.tepen.wheelwander.fragments.MessagesFragment"
+        android:label="fragment_messages"
+        tools:layout="@layout/fragment_messages" >
+        <action
+            android:id="@+id/action_messagesFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_messagesFragment2_to_marketFragment2"
+            app:destination="@id/marketFragment2" />
+        <action
+            android:id="@+id/action_messagesFragment2_to_historyFragment2"
+            app:destination="@id/historyFragment2" />
+        <action
+            android:id="@+id/action_messagesFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="me.tepen.wheelwander.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_profileFragment2_to_messagesFragment2"
+            app:destination="@id/messagesFragment2" />
+        <action
+            android:id="@+id/action_profileFragment2_to_marketFragment2"
+            app:destination="@id/marketFragment2" />
+        <action
+            android:id="@+id/action_profileFragment2_to_historyFragment2"
+            app:destination="@id/historyFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/marketFragment2"
+        android:name="me.tepen.wheelwander.fragments.MarketFragment"
+        android:label="fragment_market"
+        tools:layout="@layout/fragment_market" >
+        <action
+            android:id="@+id/action_marketFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_marketFragment2_to_messagesFragment2"
+            app:destination="@id/messagesFragment2" />
+        <action
+            android:id="@+id/action_marketFragment2_to_historyFragment2"
+            app:destination="@id/historyFragment2" />
+        <action
+            android:id="@+id/action_marketFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
 </navigation>

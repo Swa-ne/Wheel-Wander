@@ -1,6 +1,5 @@
 import express, {Express, Request, Response} from "express"
 import { checkEmailAvailability, checkUsernameAvailability, loginUsertoDatabase, registerUsertoDatabase } from "../models/entry";
-import { authenticateToken } from "./auth"
 import { HttpResponse } from "../models/http-response"
 
 import jwt from "jsonwebtoken";
