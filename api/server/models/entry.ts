@@ -23,7 +23,7 @@ export const registerUsertoDatabase = async (username : String, emailAddress: St
     try {
         const saltRounds = await bcrypt.genSalt();
         password = await bcrypt.hash(password, saltRounds)
-        const [result] = await pool.query(`INSERT INTO user_login_data (username, emailAddress, PasswordHash, DateCreated) VALUES (?, ?, ?, curdate());`, [username, emailAddress, password])
+        const [result] = await pool.query(`INSERT INTO user_login_data (username, emailAddress, PasswordHash, DateCreated) VALUES (?, ?, ?, now());`, [username, emailAddress, password])
         return true
     } catch {
         return false

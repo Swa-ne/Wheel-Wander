@@ -1,5 +1,6 @@
 import express, {Express, Request, Response} from "express"
 import bodyParser from "body-parser"
+import socket from "socket.io"
 
 import dotenv from "dotenv"
 dotenv.config()

@@ -1,0 +1,20 @@
+POST http://localhost:3000/message/open
+content-type: application/json
+
+{
+    "sender": "Qt",
+    "receiver": "John"
+}
+
+###
+POST http://localhost:3000/message/send
+Content-Type: application/json
+
+{
+    "sender": "Qt",
+    "receiver": "John",
+    "message" : "Jawers"
+}
+
+###
+GET http://localhost:3000/message/getUsers/1
