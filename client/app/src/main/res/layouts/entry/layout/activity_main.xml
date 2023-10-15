@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity" >
 
     <FrameLayout
         android:id="@+id/fragmentContainerView"
@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/navigation" />
+        app:navGraph="@navigation/navigation"
+        android:background="@color/primaryColor"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -23,29 +24,31 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragmentContainerView">
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:backgroundTint="@color/secondaryColor"
+            app:contentInsetStart="0dp"
             app:fabCradleMargin="8dp"
-            app:fabCradleVerticalOffset="0dp"
-            app:fabCradleRoundedCornerRadius="20dp"
-            app:contentInsetEnd="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetRight="0dp"
-            app:contentInsetStart="0dp">
+            app:fabCradleRoundedCornerRadius="5dp"
+            app:fabCradleVerticalOffset="0dp">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@color/transparent"
+                app:itemIconTint="@color/ternaryColor"
+                app:itemTextColor="@color/ternaryColor"
                 app:labelVisibilityMode="labeled"
-                android:background="@android:color/transparent"
-                app:menu="@menu/bottom_navigation_menu"/>
+                app:menu="@menu/bottom_navigation_menu"
+                app:elevation="0dp"/>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -54,11 +57,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/tab5"
-            android:src="@drawable/market_icon_normal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#FFFFFF"
+            android:src="@drawable/market_icon_selector"
             app:fabCustomSize="60dp"
+            app:layout_anchor="@id/bottomAppBar"
+            app:layout_constraintTop_toTopOf="parent"
             app:maxImageSize="43dp"
-            app:layout_anchor="@id/bottomAppBar"/>
+            android:backgroundTint="@color/secondaryColor"
+            app:tint="@color/ternaryColor" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

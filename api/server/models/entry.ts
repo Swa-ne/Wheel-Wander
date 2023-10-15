@@ -42,6 +42,18 @@ export const checkEmailAvailability = async (emailAddress : String) : Promise<bo
     return result.length == 0
 }
 
+export const getUserIDByUsername = async (username : String) : Promise<boolean> => {
+    const [result] : Array<any> = await pool.query(`SELECT UserID FROM user_login_data WHERE Username = ?;`, username)
+    
+    return result[0]["UserID"]
+}
+
+export const getUserIDByEmailAddress = async (email : String) : Promise<boolean> => {
+    const [result] : Array<any> = await pool.query(`SELECT UserID FROM user_login_data WHERE EmailAddress = ?;`, email)
+    
+    return result[0]["UserID"]
+}
+
 // export const addRefreshToken = async (refreshToken : String) => {
 //     try{
 //         const [result] : Array<any> = await pool.query(`INSERT INTO refresh_token (token) VALUES (?)`, refreshToken)

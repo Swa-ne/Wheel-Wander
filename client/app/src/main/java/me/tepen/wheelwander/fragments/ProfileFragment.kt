@@ -27,7 +27,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.logoutButton.setOnClickListener{
             activity?.let { it1 ->
-                EncryptSharedPreference(it1).getEncryptedSharedPreference()?.edit()?.putString("token", null)
+                EncryptSharedPreference(it1).getEncryptedSharedPreference()?.edit()?.clear()
                     ?.apply()
             }
             intent = Intent(activity, LoginActivity::class.java)

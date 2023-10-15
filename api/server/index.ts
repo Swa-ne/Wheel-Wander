@@ -1,10 +1,10 @@
 import express, {Express, Request, Response} from "express"
 import bodyParser from "body-parser"
-import socket from "socket.io"
 
 import dotenv from "dotenv"
 dotenv.config()
 
+const socket = require("socket.io")
 const entryRoutes = require("./routes/entry")
 const messageRoutes = require("./routes/message")
 
@@ -26,6 +26,22 @@ app.get('/', (req, res) => {
   res.send('Hello from your Node.js Express server!');
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+
+const io = socket(server, {
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket : any) => {
+  socket.on("send-msg", (data : any) => {
+    data = JSON.parse(data)
+    console.log(data, data.senderID)
+    socket.to(`CHATID-${data.senderID}`).emit("msg-recieve", data.msg)
+  })
+})

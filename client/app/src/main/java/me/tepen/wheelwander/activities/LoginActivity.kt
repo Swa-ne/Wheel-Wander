@@ -71,12 +71,16 @@ class LoginActivity : AppCompatActivity() {
         var call : Call<LoginResult> = entryInterface.executeLogin(map)
         call.enqueue(object : Callback<LoginResult> {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
+                println("Swane $response")
                 if(response.isSuccessful) {
                     var responseBodyMessage : String? = response.body()?.message
                     var responseBodyToken : String? = response.body()?.accessToken
-                    
+                    var responseBodyUserID : String? = response.body()?.userID
+
                     if(responseBodyMessage == "success") {
                         EncryptSharedPreference(this@LoginActivity).getEncryptedSharedPreference()?.edit()?.putString("token", responseBodyToken)
+                            ?.apply()
+                        EncryptSharedPreference(this@LoginActivity).getEncryptedSharedPreference()?.edit()?.putString("userID", responseBodyUserID)
                             ?.apply()
 
                         intent = Intent(applicationContext, MainActivity::class.java)
@@ -90,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResult>, t: Throwable) {
-                println("SwaneErr: " + t + call)
+                println("SwaneErrs: " + t + call)
             }
         })
     }

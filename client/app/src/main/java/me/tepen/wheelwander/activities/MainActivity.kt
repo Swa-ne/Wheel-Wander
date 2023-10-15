@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         val historyFragment = HistoryFragment()
 
         setCurrentFragment(homeFragment)
+//        TODO: deselect other nav bar buttons when market button was pressed, and change market button icon
         binding.marketButton.setOnClickListener{
             setCurrentFragment(marketFragment)
             binding.bottomNavigation.menu.setGroupCheckable(0, false, true);
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.messagesFragment ->setCurrentFragment(messagesFragment)
                 R.id.historyFragment ->setCurrentFragment(historyFragment)
                 R.id.profileFragment ->setCurrentFragment(profileFragment)
-
             }
             true
         }
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         var call : Call<LoginResult> = entryInterface.executeCheckCurrentUser(token)
         call.enqueue(object : Callback<LoginResult> {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
-
+                println("Swanes: $response")
                 if(response.isSuccessful) {
                     var responseBodyMessage : String? = response.body()?.message
                     if(responseBodyMessage != "valid"){

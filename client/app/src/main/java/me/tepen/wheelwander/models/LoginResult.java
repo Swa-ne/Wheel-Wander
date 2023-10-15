@@ -11,4 +11,6 @@ public class LoginResult {
 
     @SerializedName("refreshToken")
     public String refreshToken;
+    @SerializedName("userID")
+    public String userID;
 }

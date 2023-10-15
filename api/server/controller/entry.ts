@@ -1,5 +1,5 @@
 import express, {Express, Request, Response} from "express"
-import { checkEmailAvailability, checkUsernameAvailability, loginUsertoDatabase, registerUsertoDatabase } from "../models/entry";
+import { checkEmailAvailability, checkUsernameAvailability, getUserIDByEmailAddress, getUserIDByUsername, loginUsertoDatabase, registerUsertoDatabase } from "../models/entry";
 import { HttpResponse } from "../models/http-response"
 
 import jwt from "jsonwebtoken";
@@ -21,6 +21,7 @@ export const loginUserController = async (req : Request, res : Response) => {
         const password : String = req.body.password;
         const userIdentifierType = await checkInputType(userIdentifier)
         const checkerForInput = await checkEveryInputForLogin(userIdentifier, password, userIdentifierType)
+        let userID;
         if(checkerForInput.message["message"] === "success"){
             const data = await loginUsertoDatabase(userIdentifier, password, userIdentifierType)
             let loginUpdate = data.message
@@ -28,7 +29,12 @@ export const loginUserController = async (req : Request, res : Response) => {
                 const user = { name: userIdentifier }
                 const accessTokenSecret: any = process.env.ACCESS_TOKEN_SECRET
                 const accessToken = jwt.sign(user, accessTokenSecret)
-                loginUpdate = {...loginUpdate, accessToken : accessToken}
+                if(userIdentifierType === "Username"){
+                    userID = await getUserIDByUsername(userIdentifier)
+                } else {
+                    userID = await getUserIDByEmailAddress(userIdentifier)
+                }
+                loginUpdate = {...loginUpdate, accessToken : accessToken, userID : userID}
             }
 
             res.status(data.code).json(loginUpdate)

@@ -8,6 +8,6 @@ const router = Router()
 
 router.get("/getUsers/:userID", getUsers)
 router.post("/send", authenticateToken, sendMessage)
-router.post("/open", authenticateToken, openConversation)
+router.post("/open", openConversation)
 
 module.exports = router
