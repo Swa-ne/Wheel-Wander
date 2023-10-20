@@ -2,11 +2,13 @@ import express, {Express, Request, Response} from "express"
 import bodyParser from "body-parser"
 
 import dotenv from "dotenv"
+import path from "path"
 dotenv.config()
 
 const socket = require("socket.io")
 const entryRoutes = require("./routes/entry")
 const messageRoutes = require("./routes/message")
+const marketRoutes = require("./routes/market")
 
 
 const app = express();
@@ -19,8 +21,11 @@ app.use(
   }),
 );
 
-app.use("/entry/", entryRoutes)
+app.use("/images", express.static(path.join(__dirname, '../Images')));
+
 app.use("/message/", messageRoutes)
+app.use("/entry/", entryRoutes)
+app.use("/market/", marketRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello from your Node.js Express server!');

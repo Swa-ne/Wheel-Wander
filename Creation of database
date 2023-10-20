@@ -4,3 +4,8 @@ CREATE TABLE user_login_data (UserID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, Us
 CREATE TABLE user_account (UserID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, LName Varchar(50) NOT NULL, FName VARCHAR(50) NOT NULL, MName VARCHAR(50) NOT NULL, avatarImage VARCHAR(250), Gender CHAR(1), DateOfBirth DATETIME NOT NULL);
 CREATE TABLE conversation (ChatID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, User1ID INT REFERENCES user_login_data(UserID), User2ID INT REFERENCES user_login_data(UserID));
 CREATE TABLE message (MsgID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, ChatID INT NOT NULL REFERENCES conversation(ChatID), Message VARCHAR(1000) NOT NULL, Sender INT NOT NULL REFERENCES user_login_data(UserID), DateSent DATETIME NOT NULL);
+CREATE TABLE vehicle_and_owner (ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, VehicleID INT NOT NULL REFERENCES vehicle_details(vehicleID), UserID INT REFERENCES user_login_data(UserID));
+CREATE TABLE vehicle_details (VehicleID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, VehicleType VARCHAR(25) NOT NULL, VehicleBrand VARCHAR(25) NOT NULL, VehicleModel VARCHAR(50) NOT NULL, PlateNumber VARCHAR(15) NOT NULL, Fuel VARCHAR(10) NOT NULL, Description VARCHAR(200) NOT NULL, Location VARCHAR(50) NOT NULL, Longitude VARCHAR(25) NOT NULL, Latitude VARCHAR(25) NOT NULL, Price INT NOT NULL, TimeFrame VARCHAR(25) NOT NULL, Listed CHAR(1) NOT NULL, TimesRented INT NOT NULL DEFAULT 0);
+CREATE TABLE vehicle_image (ImageID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, ImagePath VARCHAR(100) NOT NULL, VehicleID INT NOT NULL REFERENCES vehicle_details(vehicleID), MainImage CHAR(1) NOT NULL);
+
+CREATE TABLE vehicle_details (VehicleType, VehicleBrand, VehicleModel, PlateNumber, Fuel, Description, Location, Longitude, Latitude, Price, TimeFrame, Listed);
