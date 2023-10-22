@@ -43,10 +43,31 @@ const io = socket(server, {
   },
 });
 
+interface UserInfo {
+  socketId: string;
+}
+
+interface OnlineUsers {
+  [userId: string]: UserInfo;
+}
+declare const global: {
+  chatSocket: any; 
+  onlineUsers: Map<string, UserInfo>; 
+};
+
+
+global.onlineUsers = new Map<string, UserInfo>();
 io.on("connection", (socket : any) => {
+  global.chatSocket = socket;
+  console.log(global.chatSocket)
+  socket.on("add-user", (userId : any) => {
+    global.onlineUsers.set(userId, socket.id);
+  });
+
   socket.on("send-msg", (data : any) => {
-    data = JSON.parse(data)
-    console.log(data, data.senderID)
-    socket.to(`CHATID-${data.senderID}`).emit("msg-recieve", data.msg)
-  })
-})
+    const sendUserSocket = global.onlineUsers.get(data.to);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("msg-receive", data.msg);
+    }
+  });
+});

@@ -4,6 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.INVISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +23,7 @@ import me.tepen.wheelwander.interfaces.MarketInterface
 import me.tepen.wheelwander.models.GetVehicles
 import me.tepen.wheelwander.models.Vehicles
 import me.tepen.wheelwander.network.APIClient
+import me.tepen.wheelwander.utils.EncryptSharedPreference
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,18 +51,25 @@ class VehicleRentingLayout : AppCompatActivity() {
         val arrayList = ArrayList<String>()
         val vehicleID = intent.getStringExtra("vehicleID")
 
+
+
         var call1 : Call<GetVehicles> = marketInterface.getVehiclesID(vehicleID)
         call1.enqueue(object : Callback<GetVehicles> {
             override fun onResponse(call: Call<GetVehicles>, response: Response<GetVehicles>) {
                 if(response.isSuccessful) {
                     var vehicleDetails = response.body()?.vehicleDetails
                     Log.d("AMAZING1s", vehicleDetails.toString())
-
+                    val currentUserID = EncryptSharedPreference(this@VehicleRentingLayout).getEncryptedSharedPreference()?.getString("userID", null)
+                    Log.d("AMAZING1s", "${currentUserID} ${vehicleDetails?.get(0)?.UserID.toString()}")
+                    if(currentUserID.equals(vehicleDetails?.get(0)?.UserID.toString())){
+                        binding.chatButton.visibility = INVISIBLE
+                        binding.rentVehicleButton.visibility = INVISIBLE
+                    }
 
 
                     binding.vehicleName.text = vehicleDetails?.get(0)?.VehicleModel
                     binding.vehicleRented.text = "${vehicleDetails?.get(0)?.TimesRented}x Rented"
-                    binding.vehiclePrice.text = "${vehicleDetails?.get(0)?.Price} ${vehicleDetails?.get(0)?.TimeFrame}"
+                    binding.vehiclePrice.text = "₱${vehicleDetails?.get(0)?.Price} ${vehicleDetails?.get(0)?.TimeFrame}"
                     binding.ownerName.text = vehicleDetails?.get(0)?.UserName
                     binding.description.text = vehicleDetails?.get(0)?.Description
                     binding.vehicleType.text = vehicleDetails?.get(0)?.VehicleType
@@ -68,7 +77,12 @@ class VehicleRentingLayout : AppCompatActivity() {
                     binding.plateNumber.text = vehicleDetails?.get(0)?.PlateNumber
                     binding.fuel.text = vehicleDetails?.get(0)?.Fuel
                     binding.location.text = vehicleDetails?.get(0)?.Location
-
+                    binding.chatButton.setOnClickListener {
+                        val intent = Intent(this@VehicleRentingLayout, MainChatActivity::class.java)
+                        intent.putExtra("username", vehicleDetails?.get(0)?.UserName)
+                        intent.putExtra("userIDReceiver", vehicleDetails?.get(0)?.UserID)
+                        this@VehicleRentingLayout.startActivity(intent)
+                    }
 
 
                     var images = response.body()?.mainImage

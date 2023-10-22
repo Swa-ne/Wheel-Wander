@@ -20,7 +20,7 @@ const upload = multer({storage: storage})
 const router = Router()
 
 router.get("/getVehicles", getVehicles)
-router.get("/getVehicles/:id", getVehiclesID)
+router.get("/getVehicle/:id", getVehiclesID)
 router.get("/getVehicles/:type", getVehiclesType)
 router.get("/getBestVehicles", getBestVehicles)
 router.post("/uploadImage", upload.array("image"), uploadVehicleImage)

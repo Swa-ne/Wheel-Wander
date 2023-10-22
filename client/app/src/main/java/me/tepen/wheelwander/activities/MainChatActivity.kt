@@ -68,7 +68,6 @@ class MainChatActivity : AppCompatActivity() {
 
 //                TODO: Put message to Client screen
 //                addMessagetoClientScreen(msg)
-//                TODO: Put message to database
                 addMessagetoDatabase(userIDSender, userIDReceiver, msg)
 
                 binding.messageEditText.setText("")

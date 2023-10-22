@@ -65,8 +65,63 @@ class MarketFragment : Fragment() {
         view = inflater.inflate(R.layout.fragment_market, container, false)
         retrofit = APIClient().getClient()!!
 
+
+
         marketInterface = retrofit.create(MarketInterface::class.java)
-        updatePage()
+        val receivedData = arguments?.getString("filter")
+        if(!receivedData.isNullOrBlank()){
+
+            vehicleDetailsList = ArrayList()
+            vehicleDetailsList.clear()
+            var call2 : Call<GetVehicles> = when(receivedData){
+                "Motorcycle" -> marketInterface.getVehiclesMotorcycle()
+                "Car" -> marketInterface.getVehiclesCar()
+                "SUV" -> marketInterface.getVehiclesSUV()
+                "Van" -> marketInterface.getVehiclesVan()
+                "Pickup Truck" -> marketInterface.getVehiclesTruck()
+                else -> marketInterface.getVehicles()
+            }
+
+            call2.enqueue(object : Callback<GetVehicles> {
+                override fun onResponse(call: Call<GetVehicles>, response: Response<GetVehicles>) {
+                    if(response.isSuccessful) {
+                        var vehicleDetails = response.body()?.vehicleDetails
+                        var images = response.body()?.mainImage
+                        lifecycleScope.launch {
+                            var i = 0
+                            if (vehicleDetails != null) {
+                                for (vehicleDetail in vehicleDetails){
+                                    vehicleDetailsList.add(Vehicles(vehicleDetail.VehicleID.toString(), vehicleDetail.VehicleType, "${vehicleDetail.VehicleBrand} ${vehicleDetail.VehicleModel}", getBitmap("${BASE_URL}${images?.get(i)?.ImagePath}"), "₱${vehicleDetail.Price} ${vehicleDetail.TimeFrame}"))
+                                    i++
+                                }
+
+                            }
+                            if(vehicleDetailsList.size == 0){
+                                view.findViewById<TextView>(R.id.availableTv).text = "No Available Vehicle"
+                            }else{
+                                view.findViewById<TextView>(R.id.availableTv).text = "Available Vehicle"
+                            }
+
+                            adapter = TopVehicleAdapter(vehicleDetailsList)
+
+                            rentedVehicleRecyclerView = view.findViewById(R.id.rentedVehicleRecyclerView)
+                            rentedVehicleRecyclerView.layoutManager = GridLayoutManager(context, 2)
+
+                            rentedVehicleRecyclerView.adapter = adapter
+                        }
+                    } else {
+                        Toast.makeText(activity?.applicationContext, "Server Error!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<GetVehicles>, t: Throwable) {
+                    Toast.makeText(activity?.applicationContext, "Server Error!", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            updatePage()
+        }
+
         view.findViewById<FloatingActionButton>(R.id.floating_action_button).setOnClickListener {
             AddProductDialog().display(fragmentManager)
         }

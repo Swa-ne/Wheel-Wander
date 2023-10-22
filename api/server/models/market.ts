@@ -59,7 +59,7 @@ export const getVehiclesTypeFromDatabase = async (type: String) => {
     try {
         let [result] : Array<any> = await pool.query(`SELECT * FROM vehicle_details WHERE VehicleType = ?;`, type)
         let l = '1';
-        let [mainImage] : Array<any> = await pool.query(`SELECT * FROM vehicle_image WHERE mainImage = ?`, l)
+        let [mainImage] : Array<any> = await pool.query(`SELECT * FROM vehicle_image WHERE mainImage = ? and VehicleType = ?`, [l, type])
         return {"vehicleDetails": result, "mainImage": mainImage}
     } catch {
         return false
@@ -70,12 +70,16 @@ export const getVehiclesDetailsFromDatabase = async (id: String) => {
         let [result] : Array<any> = await pool.query(`SELECT * FROM vehicle_details WHERE VehicleID = ?;`, id)
         let [mainImage] : Array<any> = await pool.query(`SELECT * FROM vehicle_image WHERE VehicleID = ?`, id)
         let [userID] : Array<any> = await pool.query(`SELECT UserID FROM vehicle_and_owner WHERE VehicleID = ?`, id)
-        userID = userID[0].UserID
+        if(userID[0]){
+            userID = userID[0].UserID
+        }else{
+            userID = 0
+        }
         let [userName] : Array<any> = await pool.query(`SELECT Username FROM user_login_data WHERE UserID = ?`, userID)
         
         let vehicleDetails = result
         vehicleDetails[0]["UserID"] = userID
-        vehicleDetails[0]["UserName"] = userName[0].Username
+        vehicleDetails[0]["UserName"] = (userName[0]) ? userName[0].Username : ""
 
 
         return {vehicleDetails, "mainImage": mainImage}

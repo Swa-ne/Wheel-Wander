@@ -14,6 +14,8 @@ import retrofit2.http.Path;
 public interface MarketInterface {
     @GET("/market/getVehicles")
     Call<GetVehicles> getVehicles();
+    @GET("/market/getBestVehicles")
+    Call<GetVehicles> getBestVehicles();
 
     @GET("/market/getVehicles/motorcycle")
     Call<GetVehicles> getVehiclesMotorcycle();
@@ -26,6 +28,6 @@ public interface MarketInterface {
     @GET("/market/getVehicles/truck")
     Call<GetVehicles> getVehiclesTruck();
 
-    @GET("/market/getVehicles/{id}")
+    @GET("/market/getVehicle/{id}")
     Call<GetVehicles> getVehiclesID(@Path("id") String id);
 }

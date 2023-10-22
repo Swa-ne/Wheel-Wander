@@ -107,6 +107,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/motorcycle"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -142,6 +143,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/car"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -176,6 +178,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/suv"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -220,6 +223,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/van"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -253,6 +257,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/truck"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_margin="10dp"
@@ -308,7 +313,7 @@
                     android:textSize="24sp"/>
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/seeAllButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all"
@@ -329,4 +334,21 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="560dp"
+        android:text="Top Rented Vehicles"
+        android:textColor="@color/ternaryColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
