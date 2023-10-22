@@ -1,5 +1,5 @@
 import express, {Express, Request, Response, Router} from "express"
-import { uploadVehicleImage, uploadVehicleInformation } from "../controller/market"
+import { getBestVehicles, getVehicles, getVehiclesID, getVehiclesType, uploadVehicleImage, uploadVehicleInformation } from "../controller/market"
 
 import multer from 'multer'
 import fileUpload from 'express-fileupload'
@@ -19,8 +19,10 @@ const upload = multer({storage: storage})
 
 const router = Router()
 
-// router.get("/getUsers/:userID", getUsers)
-// router.post("/send", authenticateToken, sendMessage)
+router.get("/getVehicles", getVehicles)
+router.get("/getVehicles/:id", getVehiclesID)
+router.get("/getVehicles/:type", getVehiclesType)
+router.get("/getBestVehicles", getBestVehicles)
 router.post("/uploadImage", upload.array("image"), uploadVehicleImage)
 router.post("/uploadInformation", authenticateToken, uploadVehicleInformation)
 

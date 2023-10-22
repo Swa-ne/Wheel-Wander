@@ -42,8 +42,8 @@ class HomeFragment : Fragment() {
 
             vehicleList = ArrayList()
 //            TODO: fetch top vehicles
-            vehicleList.add(Vehicles("1", "SUV", "Basta Kotse", getBitmap("http://192.168.1.97:3000/images/1697723377498.jpg"), "$200/hour"))
-            vehicleList.add(Vehicles("2", "Car", "Basta Kotse", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504="), "$200/hour"))
+            vehicleList.add(Vehicles("1", "SUV", "Basta Kotse", getBitmap("http://192.168.1.120:3000/images/1697723377498.jpg"), "$200/hour"))
+            vehicleList.add(Vehicles("2", "Car", "Basta Kotse", getBitmap("http://192.168.1.120:3000/Images\\\\1697867958144.jpg"), "$200/hour"))
             vehicleList.add(Vehicles("3", "Truck", "Basta Kotse", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504="), "$200/hour"))
             vehicleList.add(Vehicles("4", "Van", "Basta Kotse", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504="), "$200/hour"))
             vehicleList.add(Vehicles("5", "Motorcycle", "Basta Kotse", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504="), "$200/hour"))

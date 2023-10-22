@@ -8,4 +8,76 @@
         <item>Pickup Truck</item>
         <item>Others</item>
     </array>
+    <array name="vehicleTypesFilter">
+        <item>All Vehicles</item>
+        <item>Motorcycle</item>
+        <item>Car</item>
+        <item>SUV</item>
+        <item>Van</item>
+        <item>Pickup Truck</item>
+    </array>
+    <array name="vehicleBrands">
+        <item>Audi</item>
+        <item>BAIC</item>
+        <item>Bentley</item>
+        <item>BMW</item>
+        <item>BYD</item>
+        <item>Chevrolet</item>
+        <item>Chrysler</item>
+        <item>Citroën</item>
+        <item>Daewoo</item>
+        <item>Daihatsu</item>
+        <item>Dodge</item>
+        <item>Ferrari</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Geely</item>
+        <item>Genesis</item>
+        <item>Honda</item>
+        <item>Hummer</item>
+        <item>Hyundai</item>
+        <item>Infiniti</item>
+        <item>Isuzu</item>
+        <item>Jaguar</item>
+        <item>Jeep</item>
+        <item>Kia</item>
+        <item>Lamborghini</item>
+        <item>Land Rover</item>
+        <item>Lexus</item>
+        <item>Lifan</item>
+        <item>Lotus</item>
+        <item>Maserati</item>
+        <item>Maxus</item>
+        <item>Mazda</item>
+        <item>McLaren</item>
+        <item>Mercedes-Benz</item>
+        <item>MG</item>
+        <item>Mini</item>
+        <item>Mitsubishi</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Porsche</item>
+        <item>Ram</item>
+        <item>Subaru</item>
+        <item>Suzuki</item>
+        <item>Tata</item>
+        <item>Tesla</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+        <item>Volvo</item>
+        <item>Other</item>
+    </array>
+    <array name="fuel">
+        <item>Petrol</item>
+        <item>Diesel</item>
+        <item>Hybrid</item>
+        <item>Plugin Hybrid</item>
+        <item>Electric</item>
+    </array>
+    <array name="timeFrame">
+        <item>Hourly</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </array>
 </resources>

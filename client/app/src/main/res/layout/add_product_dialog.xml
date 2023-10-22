@@ -94,7 +94,7 @@
                     android:hint="Brand of Vehicle"
                     android:inputType="none"
                     android:minHeight="48dp"
-                    app:simpleItems="@array/vehicleTypes" />
+                    app:simpleItems="@array/vehicleBrands" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Fuel of Vehicle"
                     android:inputType="none"
-                    app:simpleItems="@array/vehicleTypes" />
+                    app:simpleItems="@array/fuel" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -289,7 +289,7 @@
                         android:hint="Time Frame"
                         android:inputType="none"
                         android:minHeight="48dp"
-                        app:simpleItems="@array/vehicleTypes" />
+                        app:simpleItems="@array/timeFrame" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

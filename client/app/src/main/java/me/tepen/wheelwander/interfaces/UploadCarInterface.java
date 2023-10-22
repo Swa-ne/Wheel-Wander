@@ -17,7 +17,7 @@ import retrofit2.http.Part;
 public interface UploadCarInterface {
     @POST("/market/uploadImage")
     @Multipart
-    Call<UploadResult> uploadVehicleImage(@Part List<MultipartBody.Part> image);
+    Call<UploadResult> uploadVehicleImage(@Part List<MultipartBody.Part> image, @Part("plateNumber") String plateNumber, @Part("type") String type);
     @POST("/market/uploadInformation")
     Call<UploadResult> uploadVehicleInformation(
             @Header("authorization") String token,

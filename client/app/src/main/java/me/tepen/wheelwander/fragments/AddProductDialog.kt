@@ -46,6 +46,7 @@ class AddProductDialog : DialogFragment() {
 
     private var FINE_PERMISSION_CODE = 1;
     private lateinit var toolbar : Toolbar
+    private lateinit var intent : Intent
     private lateinit var uploadCarInterface: UploadCarInterface
     private lateinit var retrofit: Retrofit
     private lateinit var ImageUri : Uri
@@ -99,6 +100,7 @@ class AddProductDialog : DialogFragment() {
 
 
         var map : HashMap<String, String> = HashMap()
+        map["userID"] = activity?.let { EncryptSharedPreference(it.applicationContext).getEncryptedSharedPreference()?.getString("userID", "") }.toString()
         map["type"] = binding.typeVehicleEt.text.toString()
         map["brand"] = binding.brandVehicleEt.text.toString()
         map["model"] = binding.modelVehicleEt.text.toString()
@@ -116,29 +118,7 @@ class AddProductDialog : DialogFragment() {
         for (uri in chosenImageList){
             list.add(prepareImagePart(uri, "image"))
         }
-        list.forEach { part ->
-            println("Headers: ${part.headers}")
-            println("Body: ${part.body}")
-        }
-        var call1 : Call<UploadResult> = uploadCarInterface.uploadVehicleImage(list)
-        call1.enqueue(object : Callback<UploadResult> {
-            override fun onResponse(call: Call<UploadResult>, response: Response<UploadResult>) {
-                if(response.isSuccessful) {
-                    var responseBodyMessage : String? = response.body()?.message
 
-                    if(responseBodyMessage == "success") {
-                    } else {
-                        Toast.makeText(requireActivity(), "Server Error!", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(requireActivity(), "Server Error!", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<UploadResult>, t: Throwable) {
-                Log.d("AMAZING", "NOT WORKING")
-            }
-        })
         var call2 : Call<UploadResult> = uploadCarInterface.uploadVehicleInformation(token, map)
         call2.enqueue(object : Callback<UploadResult> {
             override fun onResponse(call: Call<UploadResult>, response: Response<UploadResult>) {
@@ -147,10 +127,10 @@ class AddProductDialog : DialogFragment() {
 
                     if(responseBodyMessage == "success") {
                     } else {
-                        Toast.makeText(requireActivity(), "Server Error!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), "2Server Error!200", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(requireActivity(), "Server Error!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "2Server Error!500", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -158,6 +138,26 @@ class AddProductDialog : DialogFragment() {
                 Log.d("AMAZING", "NOT WORKING")
             }
         })
+        var call1 : Call<UploadResult> = uploadCarInterface.uploadVehicleImage(list, map["plateNumber"], map["type"])
+        call1.enqueue(object : Callback<UploadResult> {
+            override fun onResponse(call: Call<UploadResult>, response: Response<UploadResult>) {
+                if(response.isSuccessful) {
+                    var responseBodyMessage : String? = response.body()?.message
+
+                    if(responseBodyMessage == "success") {
+                    } else {
+                        Toast.makeText(requireActivity(), "1Server Error200!", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(requireActivity(), "1Server Error!500", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UploadResult>, t: Throwable) {
+                Log.d("AMAZING", "NOT WORKING")
+            }
+        })
+        this.dismiss()
     }
 
     private fun pickImageFromGallery() {
@@ -213,7 +213,7 @@ class AddProductDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar.setNavigationOnClickListener { dismiss() }
-        toolbar.title = "Some Title"
+        toolbar.title = "Upload Vehicle"
         toolbar.inflateMenu(R.menu.add_product_dialog)
         toolbar.setOnMenuItemClickListener { item ->
             dismiss()

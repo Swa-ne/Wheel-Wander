@@ -45,7 +45,7 @@ class MessagesFragment : Fragment() {
 
             userList = ArrayList()
 
-//           userList.add(MessageUserInbox("2","Phew", "Hello!", "11:11AM", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=")))
+           userList.add(MessageUserInbox("2","Phew", "Hello!", "11:11AM", getBitmap("https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=1024x1024&w=is&k=20&c=-mUWsTSENkugJ3qs5covpaj-bhYpxXY-v9RDpzsw504=")))
             if(userList.size > 0){
                 view.findViewById<TextView>(R.id.messageHistory).text = ""
             } else {

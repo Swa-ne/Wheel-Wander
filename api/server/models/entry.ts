@@ -32,7 +32,6 @@ export const registerUsertoDatabase = async (username : String, emailAddress: St
 
 export const checkUsernameAvailability = async (username : String) : Promise<boolean> => {
     const [result] : Array<any> = await pool.query(`SELECT * FROM user_login_data WHERE Username = ?;`, username)
-    
     return result.length == 0
 }
 

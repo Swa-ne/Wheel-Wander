@@ -56,7 +56,7 @@ class MainChatActivity : AppCompatActivity() {
         messageList = ArrayList()
         messageChatAdapter = MessageChatAdapter(messageList)
 
-        binding.title.text = username
+        binding.toolbar.title = username
         binding.messageRecyclerView
         binding.sendButton.setOnClickListener{
             try {

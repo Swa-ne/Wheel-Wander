@@ -29,7 +29,6 @@ export const openConversation = async (req : Request, res : Response) => {
         const chatID = await getChatID(senderID, receiverID)
     if(chatID[0]["ChatID"] > 0){
         let messages : any = await getPastMessages(chatID[0]["ChatID"])
-        console.log(messages)
             if(messages.length == 0) {
                 messages = {"message" : "NO MESSAGES"}
             }

@@ -1,9 +1,10 @@
 import express, {Express, Request, Response} from "express"
 import { HttpResponse } from "../models/http-response"
+import { getBestVehiclesFromDatabase, getVehiclesDetailsFromDatabase, getVehiclesFromDatabase, getVehiclesTypeFromDatabase, uploadVehicleDetails, uploadVehicleImages } from "../models/market"
 
 export const uploadVehicleImage = async (req : Request, res : Response) => {
     try {
-        console.log(req.files)
+        await uploadVehicleImages(req.files, req.body.plateNumber, req.body.type)
         res.status(200).json({"message": "success"})
         return;
     } catch {
@@ -14,22 +15,51 @@ export const uploadVehicleImage = async (req : Request, res : Response) => {
 
 export const uploadVehicleInformation = async (req : Request, res : Response) => {
     try {
-        console.log(req.body)
-        // const { senderID, receiverID, message } : any = req.body;
-        // let chatID = await getChatID(senderID, receiverID)
-        // if(chatID.length > 0){
-        //     addMessagetoDatabase(chatID, message, senderID)
-        // } else {
-        //     let success =  await createConversation(senderID, receiverID)
-        //     if (success[0]) {
-        //         addMessagetoDatabase(success[1], message, senderID)
-                res.status(200).json({"message": "success"})
-        //     } else {    
-        //         res.status(500).json({"message": "Internal Server Error"})
-        //     }
-        //     return;
-        // }
-        
+        await uploadVehicleDetails(req.body.userID, req.body)
+        res.status(200).json({"message": "success"})
+        return;
+    } catch {
+        res.status(500).json({"message": "Internal Server Error"})
+        return;
+    }
+}
+
+export const getVehicles = async (req : Request, res : Response) => {
+    try {
+        const result = await getVehiclesFromDatabase()
+        res.status(200).send(result)
+        return;
+    } catch {
+        res.status(500).json({"message": "Internal Server Error"})
+        return;
+    }
+}
+
+export const getVehiclesType = async (req : Request, res : Response) => {
+    try {
+        const result = await getVehiclesTypeFromDatabase(req.params.type)
+        res.status(200).send(result)
+        return;
+    } catch {
+        res.status(500).json({"message": "Internal Server Error"})
+        return;
+    }
+}
+export const getVehiclesID = async (req : Request, res : Response) => {
+    // try {
+        const result = await getVehiclesDetailsFromDatabase(req.params.id)
+        res.status(200).send(result)
+        return;
+    // } catch {
+    //     res.status(500).json({"message": "Internal Server Error"})
+    //     return;
+    // }
+}
+
+export const getBestVehicles = async (req : Request, res : Response) => {
+    try {
+        const result = await getBestVehiclesFromDatabase()
+        res.status(200).send(result)
         return;
     } catch {
         res.status(500).json({"message": "Internal Server Error"})

@@ -79,13 +79,35 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/typeOfVehicle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="150dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/filterVehicles"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Filter Vehicles"
+                        android:inputType="none"
+                        android:minHeight="48dp"
+                        app:simpleItems="@array/vehicleTypesFilter" />
+
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/availableTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:text="Available Vehicles"
                     android:textStyle="bold"
                     android:textColor="@color/ternaryColor"
